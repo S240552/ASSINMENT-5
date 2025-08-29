@@ -2,7 +2,7 @@
         let heartCount = 0;
         let copyCount = 0;
 
-        // UI Element references
+      
         const heartCountEl = document.getElementById('heart-count');
         const coinBalanceEl = document.getElementById('coin-balance');
         const copyCountEl = document.getElementById('copy-count');
@@ -14,9 +14,7 @@
         const messageBoxText = document.getElementById('message-box-text');
         const messageBoxCloseBtn = document.getElementById('message-box-close');
 
-        // =================================================================
-        // Data for Service Cards
-        // =================================================================
+       
         const services = [
             {
                 name: "National Emergency Number",
@@ -92,38 +90,34 @@
             }
         ];
 
-        // =================================================================
-        // Helper Functions for UI and Logic
-        // =================================================================
         
-        // Function to update the coin balance display
         const updateCoinBalance = () => {
             coinBalanceEl.textContent = coins;
         };
 
-        // Function to update the heart count display
+       
         const updateHeartCount = () => {
             heartCountEl.textContent = heartCount;
         };
 
-        // Function to update the copy count display
+       
         const updateCopyCount = () => {
             copyCountEl.textContent = copyCount;
         };
 
-        // Function to show the custom message box
+        
         const showMessageBox = (title, message) => {
             messageBoxTitle.textContent = title;
             messageBoxText.textContent = message;
             messageBoxContainer.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
         };
 
-        // Function to hide the custom message box
+       
         const hideMessageBox = () => {
             messageBoxContainer.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
         };
         
-        // Function to format the current date and time
+       
         const getCurrentTime = () => {
             const now = new Date();
             const options = { 
@@ -136,7 +130,7 @@
             return now.toLocaleDateString('en-US', options);
         };
 
-        // Function to add a new entry to the call history
+     
         const addCallToHistory = (serviceName, serviceNumber) => {
             const time = getCurrentTime();
             const historyItem = document.createElement('li');
@@ -151,14 +145,10 @@
                     <p>${time}</p>
                 </div>
             `;
-            callHistoryList.prepend(historyItem); // Add to the top of the list
+            callHistoryList.prepend(historyItem); 
         };
 
-        // =================================================================
-        // Main Logic and Event Listeners
-        // =================================================================
-
-        // Generate and insert service cards into the DOM
+       
         const generateCards = () => {
             services.forEach((service, index) => {
                 const card = document.createElement('div');
@@ -197,13 +187,13 @@
                 serviceCardsContainer.appendChild(card);
             });
 
-            // Attach listeners to all newly created buttons
+          
             attachButtonListeners();
         };
 
-        // Attach event listeners to all buttons on the cards
+       
         const attachButtonListeners = () => {
-            // Heart button functionality
+            
             document.querySelectorAll('.heart-icon-btn').forEach(btn => {
                 btn.addEventListener('click', () => {
                     heartCount++;
@@ -214,7 +204,7 @@
                 });
             });
 
-            // Call button functionality
+          
             document.querySelectorAll('.call-button').forEach(btn => {
                 btn.addEventListener('click', () => {
                     if (coins < 20) {
@@ -233,7 +223,7 @@
                 });
             });
 
-            // Copy button functionality
+          
             document.querySelectorAll('.copy-button').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const numberToCopy = btn.dataset.serviceNumber;
@@ -257,16 +247,16 @@
             });
         };
 
-        // Clear history button functionality
+      
         clearHistoryBtn.addEventListener('click', () => {
             callHistoryList.innerHTML = '';
             showMessageBox("History Cleared!", "Your call history has been successfully cleared.");
         });
 
-        // Event listener to close the message box
+       
         messageBoxCloseBtn.addEventListener('click', hideMessageBox);
 
-        // Initial app setup
+     
         generateCards();
         updateCoinBalance();
         updateHeartCount();
